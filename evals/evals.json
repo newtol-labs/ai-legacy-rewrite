@@ -1,0 +1,27 @@
+{
+  "skill_name": "ai-legacy-rewrite",
+  "note": "边界用例，用于验证 Skill 是否停在正确范围、区分预期变化与缺陷、隔离副作用。尚未运行。",
+  "evals": [
+    {
+      "id": 1,
+      "name": "plan-only-should-stop-at-plan",
+      "prompt": "我们公司有个用了五年的 Django 后台，代码在 ~/work/crm-legacy，大概 8 万行，改一处崩三处。老板让我先出一份重构方案给他看，暂时不要动代码。帮我出方案。",
+      "expected_output": "识别为「方案」模式；执行阶段 0 + 阶段 1 的目录级规格；交付方案文档；不创建新目录、不写代码、不进入重写；结论允许是局部修复或渐进替换而非整体重写。",
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "no-database-tool-should-not-force-services",
+      "prompt": "有个 python 命令行工具 ~/tools/dxf-weight，读 CAD 图纸算重量，就 30 个文件，但写得很乱，全是全局变量。想让 AI 帮我重写一遍，还是命令行工具，不需要网页。",
+      "expected_output": "不要求前后端分离、独立部署、空库迁移；C2 门禁中数据库相关项标不适用并写理由；架构原则中 A1b/A2/A5/A6 标不采用；仍保留隔离重写、功能契约、验收场景；识别为「实施」模式，不含切换。",
+      "files": []
+    },
+    {
+      "id": 3,
+      "name": "external-writes-require-full-tier",
+      "prompt": "把我们的订单系统重写并上线替换，旧系统会给客户发短信和邮件、调支付宝退款接口、往 ERP 写单。数据库不能停，每天都有单。旧代码在 git@internal:order-svc.git。",
+      "expected_output": "风险分级为完整版；P7a 列出短信/邮件/退款/ERP 写入四类副作用及隔离方式；P7c 选增量追平或说明为何可停写；回退方案覆盖切换后新订单如何保留；切换执行前要求用户明确确认；不得在彩排中触发真实外部写入。",
+      "files": []
+    }
+  ]
+}
