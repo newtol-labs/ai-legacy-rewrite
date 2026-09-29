@@ -16,9 +16,6 @@ assets/
   rewrite-tracker.md                  进度、差异清单、探针跟踪模板
 evals/
   evals.json                          边界用例（尚未运行）
-docs/
-  AI重写项目-提示词与检查清单.md       从原文整理的通用模板
-  ai-legacy-rewrite-对抗式审查.md     对抗式审查报告与修订记录
 ```
 
 ## 何时使用
